@@ -28,5 +28,7 @@ export const googleProvider = new firebase.auth.GoogleAuthProvider().setCustomPa
     prompt: "select_account",
   }
 );
+export const facebookProvider = new firebase.auth.FacebookAuthProvider();
+export const appleProvider = new firebase.auth.OAuthProvider("apple.com");
 
 export const deleteField = firebase.firestore.FieldValue.delete;

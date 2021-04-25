@@ -1,90 +1,159 @@
 import React, { useState } from "react";
 import queryString from "query-string";
 
-import { Typography, Button } from "@material-ui/core";
+import {
+  Typography,
+  Button,
+  Grid,
+  makeStyles,
+  createStyles,
+} from "@material-ui/core";
 
 import AuthCard from "components/Auth/AuthCard";
-
-import { handleGoogleAuth } from "../../utils/auth";
+import CustomInput from "components/CustomInput";
+import {
+  handleGoogleAuth,
+  handleFacebookAuth,
+  handleAppleAuth,
+  handleEmailAndPasswordAuth,
+} from "../../utils/auth";
 import GoogleLogo from "assets/google-icon.svg";
+import FacebookLogo from "assets/facebook-icon.svg";
+import AppleLogo from "assets/apple-icon.svg";
 import { useSnackContext } from "contexts/SnackContext";
-import { auth } from "../../firebase";
 
 export default function GoogleAuthPage() {
+  const useStyles = makeStyles((theme) =>
+    createStyles({
+      typography: { margin: theme.spacing(2) },
+      button: { marginTop: theme.spacing(1), width: "100%" },
+    })
+  );
+  const classes = useStyles();
   const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const snack = useSnackContext();
   const parsedQuery = queryString.parse(window.location.search);
 
-  return (
-    <AuthCard height={230} loading={loading}>
-      <Typography variant="overline">Google Account</Typography>
+  const authSuccess = () => {
+    setLoading(false);
+    window.location.replace("/");
+  };
 
-      <Button
-        onClick={() => {
-          setLoading(true);
-          handleGoogleAuth(
-            () => {
-              setLoading(false);
-              window.location.replace("/");
-            },
-            (error: Error) => {
-              setLoading(false);
-              console.log(error);
-              if (
-                error.message ===
-                "The identity provider configuration is disabled."
-              ) {
-                snack.open({
-                  variant: "warning",
-                  message:
-                    "You must enable Google sign-in for your Firebase project",
-                  action: (
-                    <Button
-                      component="a"
-                      href={`https://console.firebase.google.com/u/0/project/${auth.app.options["projectId"]}/authentication/providers`}
-                      target="_blank"
-                    >
-                      Go to settings
-                    </Button>
-                  ),
-                });
-              } else if (
-                error.message === "This account does not have any roles"
-              ) {
-                snack.open({
-                  variant: "warning",
-                  message: "You must set roles for this user",
-                  action: (
-                    <Button
-                      component="a"
-                      href="https://github.com/AntlerVC/firetable/wiki/Role-Based-Security-Rules#set-user-roles-with-the-firetable-cli"
-                      target="_blank"
-                    >
-                      Instructions
-                    </Button>
-                  ),
-                });
-              } else {
-                snack.open({ message: error.message });
-              }
-            },
-            parsedQuery.email as string
-          );
-        }}
-        color="primary"
-        size="large"
-        variant="outlined"
-        startIcon={
-          <img
-            src={GoogleLogo}
-            width={16}
-            height={16}
-            style={{ marginRight: 8, display: "block" }}
-          />
-        }
+  const authError = (error: Error) => {
+    setLoading(false);
+    console.log(error);
+    snack.open({ message: error.message });
+  };
+
+  return (
+    <AuthCard height={600} loading={loading}>
+      <form className="form">
+        <CustomInput
+          labelText="Email"
+          id="email"
+          formControlProps={{
+            fullWidth: true,
+          }}
+          handleChange={(e) => setEmail(e.currentTarget.value)}
+          type="text"
+        />
+        <CustomInput
+          labelText="Password"
+          id="password"
+          formControlProps={{
+            fullWidth: true,
+          }}
+          handleChange={(e) => setPassword(e.currentTarget.value)}
+          type="password"
+        />
+        <Button
+          className={classes.button}
+          onClick={() => {
+            setLoading(true);
+            handleEmailAndPasswordAuth(authSuccess, authError, email, password);
+          }}
+          size="large"
+          variant="outlined"
+        >
+          LOG IN
+        </Button>
+      </form>
+      <Grid
+        container
+        direction="column"
+        justify="space-between"
+        alignItems="center"
       >
-        SIGN IN WITH GOOGLE
-      </Button>
+        <Typography className={classes.typography} variant="overline">
+          Or
+        </Typography>
+        <Button
+          className={classes.button}
+          onClick={() => {
+            setLoading(true);
+            handleAppleAuth(authSuccess, authError);
+          }}
+          color="primary"
+          size="large"
+          variant="outlined"
+          startIcon={
+            <img
+              src={AppleLogo}
+              width={16}
+              height={16}
+              style={{ marginRight: 8, display: "block" }}
+            />
+          }
+        >
+          SIGN IN WITH APPLE
+        </Button>
+        <Button
+          className={classes.button}
+          onClick={() => {
+            setLoading(true);
+            handleGoogleAuth(
+              authSuccess,
+              authError,
+              parsedQuery.email as string
+            );
+          }}
+          color="primary"
+          size="large"
+          variant="outlined"
+          startIcon={
+            <img
+              src={GoogleLogo}
+              width={16}
+              height={16}
+              style={{ marginRight: 8, display: "block" }}
+            />
+          }
+        >
+          SIGN IN WITH GOOGLE
+        </Button>
+        <Button
+          className={classes.button}
+          onClick={() => {
+            setLoading(true);
+            handleFacebookAuth(authSuccess, authError);
+          }}
+          color="primary"
+          size="large"
+          variant="outlined"
+          startIcon={
+            <img
+              src={FacebookLogo}
+              width={16}
+              height={16}
+              style={{ marginRight: 8, display: "block" }}
+            />
+          }
+        >
+          SIGN IN WITH FACEBOOK
+        </Button>
+      </Grid>
     </AuthCard>
   );
 }
