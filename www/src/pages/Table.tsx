@@ -44,7 +44,7 @@ export default function TablePage() {
       tableState.tablePath !== tableCollection
     ) {
       if (
-        !userClaims.roles.includes("ADMIN") ||
+        userClaims.roles.includes("USER") ||
         !tableState.config.tableConfig?.roles?.some((role) =>
           userClaims.roles.includes(role)
         )
