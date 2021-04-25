@@ -56,9 +56,9 @@ const AppBar: React.FunctionComponent<IAppBarProps> = () => {
       elevation={trigger ? 4 : 0}
     >
       <Toolbar>
-        <Grid item xs>
+        {/* <Grid item xs>
           <FiretableLogo />
-        </Grid>
+        </Grid> */}
 
         <Grid item>
           <Button

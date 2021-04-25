@@ -92,7 +92,7 @@ export default function NavDrawer({
   const theme = useTheme();
   const isSm = useMediaQuery(theme.breakpoints.down("sm"));
 
-  const { sections } = useFiretableContext();
+  const { sections, userClaims } = useFiretableContext();
   const { location } = useRouter();
   const { hash } = location;
 
@@ -120,7 +120,7 @@ export default function NavDrawer({
         </Grid>
 
         <Grid item className={classes.logo}>
-          <FiretableLogo />
+          {/* <FiretableLogo /> */}
         </Grid>
       </Grid>
 
@@ -149,22 +149,23 @@ export default function NavDrawer({
                 </ListItem>
               </li>
             ))}
-
-          <li className={classes.createTable}>
-            <ListItem
-              button
-              onClick={handleCreateTable}
-              classes={{ root: classes.listItem }}
-            >
-              <ListItemIcon>
-                <AddIcon />
-              </ListItemIcon>
-              <ListItemText
-                primary="Create Table"
-                classes={{ primary: classes.listItemText }}
-              />
-            </ListItem>
-          </li>
+          {userClaims?.roles?.includes("ADMIN") && (
+            <li className={classes.createTable}>
+              <ListItem
+                button
+                onClick={handleCreateTable}
+                classes={{ root: classes.listItem }}
+              >
+                <ListItemIcon>
+                  <AddIcon />
+                </ListItemIcon>
+                <ListItemText
+                  primary="Create Table"
+                  classes={{ primary: classes.listItemText }}
+                />
+              </ListItem>
+            </li>
+          )}
         </List>
       </nav>
     </Drawer>

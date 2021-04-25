@@ -11,7 +11,7 @@ import {
 
 import { googleProvider, auth } from "../../firebase";
 import useRouter from "hooks/useRouter";
-import FiretableLogo from "assets/firetable-with-wordmark.svg";
+import FiretableLogo from "assets/logo.svg";
 
 const useStyles = makeStyles((theme) =>
   createStyles({

@@ -118,7 +118,7 @@ export default function HomePage() {
       data: null,
     });
 
-  const { sections } = useFiretableContext();
+  const { sections, userClaims } = useFiretableContext();
   const { userDoc } = useAppContext();
 
   const favs = userDoc.state.doc?.favoriteTables
@@ -284,41 +284,45 @@ export default function HomePage() {
                 </Grid>
               </section>
             ))}
-
-          <section className={classes.section}>
-            <Tooltip title="Create a table">
-              <Fab
-                className={classes.fab}
-                color="secondary"
-                aria-label="Create table"
-                onClick={handleCreateTable}
-              >
-                <AddIcon />
-              </Fab>
-            </Tooltip>
-            <Tooltip title="Configure Firetable">
-              <Fab
-                className={classes.configFab}
-                color="secondary"
-                aria-label="Create table"
-                onClick={() => setOpenProjectSettings(true)}
-              >
-                <SettingsIcon />
-              </Fab>
-            </Tooltip>
-          </section>
+          {userClaims?.roles?.includes("ADMIN") && (
+            <section className={classes.section}>
+              <Tooltip title="Create a table">
+                <Fab
+                  className={classes.fab}
+                  color="secondary"
+                  aria-label="Create table"
+                  onClick={handleCreateTable}
+                >
+                  <AddIcon />
+                </Fab>
+              </Tooltip>
+              <Tooltip title="Configure Firetable">
+                <Fab
+                  className={classes.configFab}
+                  color="secondary"
+                  aria-label="Create table"
+                  onClick={() => setOpenProjectSettings(true)}
+                >
+                  <SettingsIcon />
+                </Fab>
+              </Tooltip>
+            </section>
+          )}
         </Container>
       </main>
-
-      <TableSettingsDialog
-        clearDialog={clearDialog}
-        mode={settingsDialogState.mode}
-        data={settingsDialogState.data}
-      />
-      <ProjectSettings
-        open={openProjectSettings}
-        handleClose={() => setOpenProjectSettings(false)}
-      />
+      {userClaims?.roles?.includes("ADMIN") && (
+        <>
+          <TableSettingsDialog
+            clearDialog={clearDialog}
+            mode={settingsDialogState.mode}
+            data={settingsDialogState.data}
+          />
+          <ProjectSettings
+            open={openProjectSettings}
+            handleClose={() => setOpenProjectSettings(false)}
+          />
+        </>
+      )}
     </HomeNavigation>
   );
 }

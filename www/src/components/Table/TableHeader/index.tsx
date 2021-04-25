@@ -177,25 +177,27 @@ export default function TableHeader({
 
       <Grid item />
 
-      {!isCollectionGroup() && (
-        <Grid item>
-          <ImportCSV />
-        </Grid>
-      )}
-
-      <Grid item>
-        <Export />
-      </Grid>
-
       {userClaims?.roles?.includes("ADMIN") && (
-        <Grid item>
-          <Sparks />
-        </Grid>
-      )}
+        <>
+          {!isCollectionGroup() && (
+            <Grid item>
+              <ImportCSV />
+            </Grid>
+          )}
 
-      <Grid item>
-        <TableSettings />
-      </Grid>
+          <Grid item>
+            <Export />
+          </Grid>
+
+          <Grid item>
+            <Sparks />
+          </Grid>
+
+          <Grid item>
+            <TableSettings />
+          </Grid>
+        </>
+      )}
     </Grid>
   );
 }

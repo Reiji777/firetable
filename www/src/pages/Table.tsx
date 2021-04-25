@@ -22,7 +22,12 @@ export default function TablePage() {
   const router = useRouter();
   const tableCollection = decodeURIComponent(router.match.params.id);
 
-  const { tableState, tableActions, sideDrawerRef } = useFiretableContext();
+  const {
+    tableState,
+    tableActions,
+    userClaims,
+    sideDrawerRef,
+  } = useFiretableContext();
   const { userDoc } = useAppContext();
 
   let filters: FireTableFilter[] = [];
@@ -38,6 +43,18 @@ export default function TablePage() {
       tableState &&
       tableState.tablePath !== tableCollection
     ) {
+      if (
+        !userClaims.roles.includes("ADMIN") ||
+        !tableState.config.tableConfig?.roles?.some((role) =>
+          userClaims.roles.includes(role)
+        )
+      ) {
+        filters.push({
+          key: "_ft_updatedBy.uid",
+          operator: "==",
+          value: userClaims.user_id,
+        });
+      }
       tableActions.table.set(tableCollection, filters);
       if (filters && filters.length !== 0) {
         userDoc.dispatch({

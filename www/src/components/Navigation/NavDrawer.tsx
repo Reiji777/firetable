@@ -95,7 +95,8 @@ export default function NavDrawer({
         </Grid>
 
         <Grid item className={classes.logo}>
-          <FiretableLogo />
+          {/* TODO: Add back logo */}
+          {/* <FiretableLogo /> */}
         </Grid>
       </Grid>
 

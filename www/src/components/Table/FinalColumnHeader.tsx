@@ -40,7 +40,7 @@ const useStyles = makeStyles(() =>
 const FinalColumnHeader: Column<any>["headerRenderer"] = ({ column }) => {
   const classes = useStyles();
 
-  const { columnMenuRef } = useFiretableContext();
+  const { columnMenuRef, userClaims } = useFiretableContext();
   if (!columnMenuRef) return null;
 
   const handleClick = (
@@ -58,15 +58,17 @@ const FinalColumnHeader: Column<any>["headerRenderer"] = ({ column }) => {
       justify="center"
       className={classes.root}
     >
-      <Button
-        onClick={handleClick}
-        variant="contained"
-        color="primary"
-        className={classes.button}
-        startIcon={<AddColumnIcon />}
-      >
-        Add Column
-      </Button>
+      {userClaims?.roles?.includes("ADMIN") && (
+        <Button
+          onClick={handleClick}
+          variant="contained"
+          color="primary"
+          className={classes.button}
+          startIcon={<AddColumnIcon />}
+        >
+          Add Column
+        </Button>
+      )}
     </Grid>
   );
 };

@@ -8,7 +8,7 @@ import {
   LinearProgress,
 } from "@material-ui/core";
 
-import logo from "assets/firetable-with-wordmark.svg";
+import logo from "assets/logo.svg";
 
 const useStyles = makeStyles((theme) =>
   createStyles({

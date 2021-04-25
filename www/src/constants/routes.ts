@@ -1,3 +1,4 @@
+//TODO: remove unneeded pages
 export enum routes {
   home = "/",
   auth = "/auth",

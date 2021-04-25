@@ -47,3 +47,5 @@ cloud_functions/functions/src/functionConfig.json
 *.iml
 .idea
 *-firebase.json
+*-firebase-adminsdk-*.json
+.vscode

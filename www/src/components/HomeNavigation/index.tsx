@@ -138,9 +138,7 @@ export default function HomeNavigation({
                 <MenuIcon />
               </IconButton>
 
-              <div className={classes.logo}>
-                <FiretableLogo />
-              </div>
+              <div className={classes.logo}>{/* <FiretableLogo /> */}</div>
 
               <UserMenu />
             </Toolbar>

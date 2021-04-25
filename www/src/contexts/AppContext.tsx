@@ -104,7 +104,7 @@ export const AppProvider: React.FC = ({ children }) => {
           user: userData,
           theme: {
             palette: {
-              primary: { main: "#ef4747" },
+              primary: { main: "#388ff0" },
             },
           },
         },
