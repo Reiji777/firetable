@@ -43,12 +43,7 @@ export default function TablePage() {
       tableState &&
       tableState.tablePath !== tableCollection
     ) {
-      if (
-        userClaims.roles.includes("USER") ||
-        !tableState.config.tableConfig?.roles?.some((role) =>
-          userClaims.roles.includes(role)
-        )
-      ) {
+      if (!userClaims.roles.includes("ADMIN")) {
         filters.push({
           key: "_ft_updatedBy.uid",
           operator: "==",
