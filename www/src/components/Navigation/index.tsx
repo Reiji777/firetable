@@ -66,10 +66,10 @@ export default function Navigation({
   useEffect(() => {
     const name =
       _find(tables, ["collection", currentTable])?.name || currentTable;
-    document.title = `${name} | Firetable`;
+    document.title = `${name} | Guitar Practice Admin`;
 
     return () => {
-      document.title = "Firetable";
+      document.title = "Guitar Practice Admin";
     };
   }, [currentTable]);
 
