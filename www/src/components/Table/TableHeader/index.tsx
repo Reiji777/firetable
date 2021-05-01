@@ -15,6 +15,7 @@ import { isCollectionGroup } from "utils/fns";
 import AddRowIcon from "assets/icons/AddRow";
 
 import Filters from "../Filters";
+import ImportInstagram from "./ImportInstagram";
 import ImportCSV from "./ImportCsv";
 import Export from "./Export";
 import TableSettings from "./TableSettings";
@@ -176,6 +177,17 @@ export default function TableHeader({
       </Grid>
 
       <Grid item />
+
+      {!isCollectionGroup() && (
+        <Grid item>
+          <ImportInstagram />
+        </Grid>
+      )}
+      {!isCollectionGroup() && (
+        <Grid item>
+          <ImportCSV />
+        </Grid>
+      )}
 
       {userClaims?.roles?.includes("ADMIN") && (
         <>
