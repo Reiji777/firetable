@@ -1,5 +1,6 @@
 import queryString from "query-string";
 import useRouter from "hooks/useRouter";
+import firebase from "firebase/app";
 
 export const useSubTableData = (
   column: any,

@@ -1,6 +1,7 @@
 import { Control } from "react-hook-form";
 import { makeStyles, createStyles } from "@material-ui/core";
 import { FieldType } from "constants/fields";
+import firebase from "firebase/app";
 
 export interface IFieldProps {
   control: Control;

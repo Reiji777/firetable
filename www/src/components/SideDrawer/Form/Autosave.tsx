@@ -8,6 +8,7 @@ import _reduce from "lodash/reduce";
 
 import { Control, UseFormMethods, useWatch } from "react-hook-form";
 import { Values } from "./utils";
+import firebase from "firebase/app";
 
 import { useFiretableContext } from "contexts/FiretableContext";
 import { FiretableState } from "hooks/useFiretable";

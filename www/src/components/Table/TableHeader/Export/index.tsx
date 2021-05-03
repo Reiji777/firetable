@@ -3,7 +3,7 @@ import _camelCase from "lodash/camelCase";
 import _get from "lodash/get";
 import _find from "lodash/find";
 import _sortBy from "lodash/sortBy";
-
+import firebase from "firebase/app";
 import {
   makeStyles,
   createStyles,

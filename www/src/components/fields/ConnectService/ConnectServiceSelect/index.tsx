@@ -7,6 +7,7 @@ import useStyles from "./styles";
 import Loading from "components/Loading";
 import ErrorBoundary from "components/ErrorBoundary";
 import PopupContents from "./PopupContents";
+import firebase from "firebase/app";
 
 export type ServiceValue = {
   value: string;

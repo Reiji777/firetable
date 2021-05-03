@@ -6,6 +6,7 @@ import { TextField, TextFieldProps } from "@material-ui/core";
 import useStyles from "./styles";
 import Loading from "components/Loading";
 import ErrorBoundary from "components/ErrorBoundary";
+import firebase from "firebase/app";
 
 const PopupContents = lazy(
   () => import("./PopupContents" /* webpackChunkName: "PopupContents" */)
