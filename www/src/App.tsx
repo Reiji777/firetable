@@ -38,6 +38,12 @@ const ImpersonatorAuthPage = lazy(
 const JwtAuthPage = lazy(
   () => import("./pages/Auth/JwtAuth" /* webpackChunkName: "JwtAuthPage" */)
 );
+
+const InstagramAuthPage = lazy(
+  () =>
+    import("./pages/Auth/InstagramAuth" /* webpackChunkName: "JwtAuthPage" */)
+);
+
 // const GridView = lazy(
 //   () => import("./views/GridView" /* webpackChunkName: "GridView" */)
 // );
@@ -66,6 +72,10 @@ export default function App() {
                     exact
                     path={routes.jwtAuth}
                     render={() => <JwtAuthPage />}
+                  />
+                  <Route
+                    path={routes.instagramAuth}
+                    render={() => <InstagramAuthPage />}
                   />
                   <Route
                     exact

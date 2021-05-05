@@ -3,6 +3,7 @@ export enum routes {
   home = "/",
   auth = "/auth",
   impersonatorAuth = "/impersonatorAuth",
+  instagramAuth = "/instagramAuth",
   jwtAuth = "/jwtAuth",
   signOut = "/signOut",
   authSetup = "/authSetup",

@@ -132,68 +132,69 @@ export default function Step1Columns({ config, setConfig, isXs }: IStepProps) {
   }, [selectedFields]);
 
   return (
-    <Grid container spacing={3}>
-      <Grid item xs={12}>
-        <Typography variant="overline" gutterBottom component="h2">
-          Select Items ({selectedFields.length} of {allFields.length})
-        </Typography>
-        <Divider />
-        <Grid container xs={12} className={classes.instagramGrid}>
-          <FormControlLabel
-            labelPlacement="end"
-            control={
-              <Checkbox
-                checked={selectedFields.length === allFields.length}
-                indeterminate={
-                  selectedFields.length !== 0 &&
-                  selectedFields.length !== allFields.length
-                }
-                onChange={handleSelectAll}
-                color="default"
-              />
-            }
-            label={
-              <Typography variant="caption" color="textSecondary">
-                Select all
-              </Typography>
-            }
-            classes={{
-              root: classes.formControlLabel,
-              label: classes.columnLabel,
-            }}
-          />
-        </Grid>
-        <Grid container xs={12}>
-          {posts &&
-            posts.map((post) => (
-              <Grid
-                key={`media-${post.id}`}
-                item
-                className={classes.instagramGrid}
-                sm={12}
-                md={6}
-              >
-                <FormControlLabel
-                  labelPlacement="end"
-                  control={
-                    <Checkbox
-                      checked={selectedFields.indexOf(post) > -1}
-                      aria-label={`Select column ${post}`}
-                      onChange={handleSelect(post)}
-                      color="default"
-                    />
+    <>
+      <Grid container spacing={3}>
+        <Grid item xs={12}>
+          <Typography variant="overline" gutterBottom component="h2">
+            Select Items ({selectedFields.length} of {allFields.length})
+          </Typography>
+          <Divider />
+          <Grid container className={classes.instagramGrid}>
+            <FormControlLabel
+              labelPlacement="end"
+              control={
+                <Checkbox
+                  checked={selectedFields.length === allFields.length}
+                  indeterminate={
+                    selectedFields.length !== 0 &&
+                    selectedFields.length !== allFields.length
                   }
-                  label={<InstagramCard post={post} />}
-                  classes={{
-                    root: classes.formControlLabel,
-                    label: classes.columnLabel,
-                  }}
+                  onChange={handleSelectAll}
+                  color="default"
                 />
-              </Grid>
-            ))}
-        </Grid>
-        {/* </FadeList> */}
-        {/* {allFields.map((field) => (
+              }
+              label={
+                <Typography variant="caption" color="textSecondary">
+                  Select all
+                </Typography>
+              }
+              classes={{
+                root: classes.formControlLabel,
+                label: classes.columnLabel,
+              }}
+            />
+          </Grid>
+          <Grid container>
+            {posts &&
+              posts.map((post) => (
+                <Grid
+                  key={`media-${post.id}`}
+                  item
+                  className={classes.instagramGrid}
+                  sm={12}
+                  md={6}
+                >
+                  <FormControlLabel
+                    labelPlacement="end"
+                    control={
+                      <Checkbox
+                        checked={selectedFields.indexOf(post) > -1}
+                        aria-label={`Select column ${post}`}
+                        onChange={handleSelect(post)}
+                        color="default"
+                      />
+                    }
+                    label={<InstagramCard post={post} />}
+                    classes={{
+                      root: classes.formControlLabel,
+                      label: classes.columnLabel,
+                    }}
+                  />
+                </Grid>
+              ))}
+          </Grid>
+          {/* </FadeList> */}
+          {/* {allFields.map((field) => (
             <li key={field}>
               <FormControlLabel
                 key={field}
@@ -213,7 +214,8 @@ export default function Step1Columns({ config, setConfig, isXs }: IStepProps) {
               />
             </li>
           ))} */}
+        </Grid>
       </Grid>
-    </Grid>
+    </>
   );
 }

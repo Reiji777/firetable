@@ -183,11 +183,6 @@ export default function TableHeader({
           <ImportInstagram />
         </Grid>
       )}
-      {!isCollectionGroup() && (
-        <Grid item>
-          <ImportCSV />
-        </Grid>
-      )}
 
       {userClaims?.roles?.includes("ADMIN") && (
         <>

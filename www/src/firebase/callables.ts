@@ -3,6 +3,7 @@ import { functions } from "./index";
 export enum CLOUD_FUNCTIONS {
   ImpersonatorAuth = "callable-ImpersonatorAuth",
   triggerCloudBuild = "FT_triggerCloudBuild",
+  instagramAuthHandler = "instagramAuthHandler",
 }
 
 export const cloudFunction = (
@@ -31,3 +32,6 @@ export const ImpersonatorAuth = (email: string) =>
 
 export const triggerCloudBuild = (schemaPath: string) =>
   functions.httpsCallable(CLOUD_FUNCTIONS.triggerCloudBuild)({ schemaPath });
+
+export const instagramAuthHandler = (code: string) =>
+  functions.httpsCallable(CLOUD_FUNCTIONS.instagramAuthHandler)({ code });

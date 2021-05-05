@@ -19,6 +19,7 @@ db.enablePersistence({ synchronizeTabs: true });
 
 export const bucket = firebase.storage();
 export const functions = firebase.functions();
+// functions.useEmulator("localhost", 5001);
 
 export const WEBHOOK_URL = `https://${(functions as any).region_}-${
   appConfig.projectId
